@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Page Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
+    <script src="main.js"></script>
+  </head>
+  <body>
+    <form>
+      <div class="row">
+        <div class="form-inp">
+          <!-- label의 for속성과 input의 id가 같을때 label을 누르면 input이 활성화됨 -->
+          <label for="w"> 몸무게(kg) </label>
+          <input class="inp" placeholder="kg 단위" name="w" id="w" />
+        </div>
+        <div class="form-inp">
+          <!-- label의 for속성과 input의 id가 같을때 label을 누르면 input이 활성화됨 -->
+          <label for="h"> 키(m) </label>
+          <input class="inp" placeholder="m 단위" name="h" id="h" />
+        </div>
+        <!-- submit은 폼 요소와 연결지어 사용! tab키를 누르면 button까지 누를수 있는 기능까지 제공 -->
+        <button type="submit" class="btn">결과</button>
+      </div>
+    </form>
+  </body>
+</html>
