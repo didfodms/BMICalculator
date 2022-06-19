@@ -1,103 +1,34 @@
-let left = null,
-  right = null,
-  oper = null,
-  res = false;
-resValue = null;
+function onSubmit(event) {
+  event.preventDefault();
+  const w = parseFloat(event.target[0].value);
+  const h = parseFloat(event.target[1].value);
 
-function save() {
-  const inp = document.getElementById("top-inp");
-  let value = "";
-
-  if (left === null) return;
-  value += left + " ";
-  inp.value = value;
-
-  if (oper === null) return;
-  value += oper + " ";
-  inp.value = value;
-
-  if (right === null) return;
-  value += right + " ";
-  inp.value = value;
-
-  if (res === true) {
-    switch (oper) {
-      case "+":
-        resValue = parseInt(left) + parseInt(right);
-        break;
-      case "-":
-        resValue = parseInt(left) - parseInt(right);
-        break;
-      case "*":
-        resValue = parseInt(left) * parseInt(right);
-        break;
-      case "/":
-        resValue = parseInt(left) / parseInt(right);
-        break;
-      default:
-        break;
-    }
-    value += "= " + resValue;
-    inp.value = value;
+  if (isNaN(w) || isNaN(h) || w <= 0 || h <= 0) {
+    alert("적절한 값이 아닙니다");
+    return;
   }
-}
 
-function inputNum(num) {
-  if (oper === null) {
-    if (left === null) {
-      left = `${num}`;
-    } else {
-      if (num === 0 && parseInt(left === 0)) return;
+  const bmi = w / (h * h);
+  console.log(bmi.toFixed(2));
+  const res = document.getElementById("res");
+  res.style.display = "block";
 
-      left += `${num}`;
-    }
+  document.getElementById("bmi").innerText = bmi.toFixed(2);
+  document.getElementById("meter").value = bmi;
+
+  let state = "";
+  let common = true;
+  if (bmi < 18.5) {
+    state = "저체중";
+    common = false;
+  } else if (bmi < 23) {
+    state = "정상";
   } else {
-    if (right === null) {
-      right = `${num}`;
-    } else {
-      if (num === 0 && parseInt(left === 0)) return;
-
-      right += `${num}`;
-    }
-  }
-  save();
-}
-
-function inputOper(op) {
-  if (left === null && op === "-") {
-    left = "-";
-    save();
-    return;
+    state = "과체중";
+    common = false;
   }
 
-  if (left === "-" && op === "-") {
-    return;
-  }
-
-  if (op === "-" && oper !== null && right === null) {
-    right = "-";
-    save();
-    return;
-  }
-
-  oper = op;
-  save();
-}
-
-function inputEqu() {
-  if (left === null || right === null || !oper) {
-    return;
-  }
-
-  if (res) {
-    left = resValue;
-    right = null;
-    oper = null;
-    res = false;
-    resValue = null;
-  } else {
-    res = true;
-  }
-
-  save();
+  const stateElement = document.getElementById("state");
+  stateElement.innerText = state;
+  stateElement.style.color = common ? "#29FF21" : "#FF3A3A";
 }

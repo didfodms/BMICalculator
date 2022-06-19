@@ -9,20 +9,60 @@
     <script src="main.js"></script>
   </head>
   <body>
-    <form>
+    <form
+      onsubmit="onSubmit(event)"
+      onreset="document.getElementById('res').style.display='none'"
+    >
       <div class="row">
         <div class="form-inp">
           <!-- label의 for속성과 input의 id가 같을때 label을 누르면 input이 활성화됨 -->
           <label for="w"> 몸무게(kg) </label>
-          <input class="inp" placeholder="kg 단위" name="w" id="w" />
+          <!-- step은 0.01 단위로 number를 입력하도록 함. -->
+          <input
+            class="inp"
+            type="number"
+            placeholder="kg 단위"
+            name="w"
+            id="w"
+            min="30"
+          />
         </div>
         <div class="form-inp">
           <!-- label의 for속성과 input의 id가 같을때 label을 누르면 input이 활성화됨 -->
           <label for="h"> 키(m) </label>
-          <input class="inp" placeholder="m 단위" name="h" id="h" />
+          <input
+            class="inp"
+            type="number"
+            step="0.01"
+            placeholder="m 단위"
+            name="h"
+            id="h"
+            min="0.5"
+          />
         </div>
         <!-- submit은 폼 요소와 연결지어 사용! tab키를 누르면 button까지 누를수 있는 기능까지 제공 -->
         <button type="submit" class="btn">결과</button>
+      </div>
+      <div id="res">
+        <div>
+          <meter
+            id="meter"
+            style="width: 100%"
+            min="10"
+            max="40"
+            optimum="20"
+            low="18.5"
+            high="25"
+          ></meter>
+        </div>
+        <div class="res-text">
+          <div>당신의 BMI는 <span id="bmi"></span> 입니다</div>
+          <div><span id="state"></span> 입니다</div>
+        </div>
+        <div style="text-align: center">
+          <!-- form에 둘러싸여있는 button에 type="reset"을 주면 초기화 버튼이 된다! -->
+          <button type="reset" class="btn">초기화</button>
+        </div>
       </div>
     </form>
   </body>
